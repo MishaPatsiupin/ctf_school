@@ -13,12 +13,12 @@
 Далее проще привести отрывак кода, чтобы увидеть как я дальше суммировал строчки к первой 
 
     int offset = 15; - изза того что мы уже закинули первые 16 элементов в вектор
-    if (ascii_message.size() / 16 > 1) {
-        for (int i = 0; i < ascii_message.size() / 16; i++) {
+    if (ascii_message.size() / 16 > 1) { - если незапушенные элементы еще есть, заходим
+        for (int i = 0; i < ascii_message.size() / 16; i++) { - внешний цикл по "строкам"
 
-            for (int j = 0; j < 16; j++) {
+            for (int j = 0; j < 16; j++) {       -внутренний по элементам
                 hash_message[j] += ascii_message[j + offset] xor
-                                   (j != 15 ? ascii_message[j + offset + 1] : ascii_message[j + offset - 2]) + adder;
+                                   (j != 15 ? ascii_message[j + offset + 1] : ascii_message[j + offset - 2]) + adder;    - просто суммировать строчки скучно, поэтому xor, да добовление переменной. Но все еще функция "плохая"
                 adder++;
             }
             offset += 16;
@@ -27,7 +27,7 @@
 
 Далее я тусанул элементы, взял по модулю, и оставил только единицы каждого элемента
     for (int i = 0; i < 16; i++) {
-        hash_message[i] += ascii_message[15 - i];
+        hash_message[i] += ascii_message[15 - i]; - вот теперь при малейшем изменении входных данный hash изменяется заметнее
 
         if (hash_message[i] < 0) {
             hash_message[i] = -hash_message[i];
