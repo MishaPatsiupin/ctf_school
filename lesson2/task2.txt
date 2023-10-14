@@ -1,0 +1,12 @@
+Не очень понятно что необходимо сделать, но вот пример аунтификации
+
+POST /api/check-password-hash HTTP/1.1
+Host: example.com
+Content-Type: application/json
+
+{
+  "username": "your_username",
+  "password_hash": "your_password_hash"
+}
+
+
